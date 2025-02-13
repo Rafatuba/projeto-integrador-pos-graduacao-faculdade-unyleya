@@ -2,7 +2,7 @@ import { NavLink } from "react-router-dom";
 
 export default function Header() {
   return (
-    <header className="flex justify-between items-center py-4 px-4 bg-primary text-white fixed top-0 w-full">
+    <header className="flex justify-between items-center py-4 px-4 bg-primary text-white fixed z-50 top-0 w-full">
       <h1 className="text-3xl">
         <NavLink to="/">UnyBay</NavLink>
       </h1>
