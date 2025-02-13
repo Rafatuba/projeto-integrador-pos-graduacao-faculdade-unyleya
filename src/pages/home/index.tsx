@@ -1,3 +1,4 @@
+import { NavLink } from "react-router-dom";
 import CardProduto from "../../components/card-produto";
 import Carrossel from "../../components/carrossel";
 import Categorias from "../../components/categorias";
@@ -25,7 +26,9 @@ export default function Home() {
           <CardProduto />
           <CardProduto />
         </div>
-        <p className="text-end mt-4 text-blue-400">Ver mais</p>
+        <NavLink to="/produtos">
+          <p className="text-end mt-4 text-blue-400">Ver mais</p>
+        </NavLink>
       </div>
 
       <Categorias />

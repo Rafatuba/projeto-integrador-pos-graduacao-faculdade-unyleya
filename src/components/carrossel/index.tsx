@@ -1,7 +1,7 @@
 import { Carousel } from "react-responsive-carousel";
-import ControlesImg from "../../../public/controles.webp";
-import DescontoImg from "../../../public/desconto.webp";
-import macsImg from "../../../public/macs.webp";
+import ControlesImg from "../../assets/controles.webp";
+import DescontoImg from "../../assets/desconto.webp";
+import macsImg from "../../assets/macs.webp";
 
 export default function Carrossel() {
   return (
