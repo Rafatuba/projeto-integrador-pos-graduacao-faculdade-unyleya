@@ -7,6 +7,15 @@ export default function Home() {
   return (
     <UserTemplate>
       <Carrossel />
+
+      <div>
+        <input
+          type="text"
+          className="shadow w-full h-12 rounded-sm my-6 p-3 text-lg"
+          placeholder="&#128269; Buscar produto"
+        />
+      </div>
+
       <div className="w-full p-5 mb-5">
         <h2 className="text-lg font-medium mb-4">Produtos recentes</h2>
         <div className="flex flex-wrap gap-4">
