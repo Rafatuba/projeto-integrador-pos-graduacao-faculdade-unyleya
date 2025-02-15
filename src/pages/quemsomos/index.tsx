@@ -6,7 +6,7 @@ export default function QuemSomos() {
       <section className="flex flex-col gap-8 p-6 max-w-4xl">
         <div>
           <h1 className="text-primary text-xl font-medium">Quem somos</h1>
-          <p>
+          <p className="text-lg">
             Bem-vindo à Unybay, sua nova loja de eletrônicos online, onde
             inovação, qualidade e excelência se encontram para transformar sua
             experiência de compra! Na Unybay, acreditamos que a tecnologia pode
@@ -23,30 +23,31 @@ export default function QuemSomos() {
             O que nos torna únicos?
           </h1>
           <ul className="flex flex-col gap-2">
-            <li>
+            <li className="text-lg">
               <span className="font-medium">Variedade e Qualidade</span>:
               Trabalhamos com as melhores marcas e garantimos a qualidade de
               todos os nossos produtos. Você encontra tudo, desde smartphones,
               notebooks, gadgets e acessórios, até eletrodomésticos de última
               geração, tudo em um só lugar.
             </li>
-            <li>
+            <li className="text-lg">
               <span className="font-medium">Preços Competitivos</span>:
               Acreditamos que todo mundo merece ter acesso à tecnologia de
               ponta. Por isso, oferecemos preços justos e promoções especiais
               para que você possa aproveitar as melhores ofertas.
             </li>
-            <li>
+            <li className="text-lg">
               <span className="font-medium">Atendimento Personalizado</span>:
               Nossa equipe está sempre pronta para ajudar você a escolher o
               produto perfeito para suas necessidades. Se tiver dúvidas, estamos
               aqui para oferecer o suporte que você precisa, seja antes ou
               depois da compra.
             </li>
-            <li>
-              Entrega Rápida e Segura: Trabalhamos com os melhores serviços de
-              entrega para garantir que seu produto chegue até você no menor
-              tempo possível, de forma segura e eficiente.
+            <li className="text-lg">
+              <span className="font-medium">Entrega Rápida e Segura</span>:
+              Trabalhamos com os melhores serviços de entrega para garantir que
+              seu produto chegue até você no menor tempo possível, de forma
+              segura e eficiente.
             </li>
           </ul>
         </div>
@@ -55,7 +56,7 @@ export default function QuemSomos() {
           <h1 className="text-primary text-xl font-medium">
             Nosso Compromisso
           </h1>
-          <p>
+          <p className="text-lg">
             Na Unybay, o compromisso com a satisfação do cliente é nossa maior
             prioridade. Queremos que sua experiência de compra seja fácil,
             rápida e, acima de tudo, agradável. Estamos sempre dispostos a ouvir
