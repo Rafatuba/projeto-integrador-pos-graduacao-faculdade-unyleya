@@ -6,6 +6,7 @@ import ListProducts from "./pages/list-products";
 import Detalhes from "./pages/detalhes";
 import ResultadoBusca from "./pages/resultado-busca";
 import NotFound from "./pages/not-found";
+import FaleConosco from "./pages/fale-conosco";
 
 export default function App() {
   const router = createBrowserRouter([
@@ -28,6 +29,10 @@ export default function App() {
     {
       path: "/resultado-busca",
       element: <ResultadoBusca />,
+    },
+    {
+      path: "/fale-conosco",
+      element: <FaleConosco />,
     },
     {
       path: "*",
