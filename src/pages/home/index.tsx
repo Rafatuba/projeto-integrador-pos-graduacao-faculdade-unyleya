@@ -9,12 +9,17 @@ export default function Home() {
     <UserTemplate>
       <Carrossel />
 
-      <div>
+      <div className="flex justify-center items-center gap-3 w-full p-5">
         <input
           type="text"
-          className="shadow w-full h-12 rounded-sm my-6 p-3 text-lg"
-          placeholder="&#128269; Buscar produto"
+          className="w-3xl h-12 rounded-sm my-6 p-3 text-lg border border-gray-300"
+          placeholder="O que você procura?"
         />
+        <NavLink to="/resultado-busca">
+          <button className="bg-primary text-white py-2 px-5 text-lg h-12 rounded-sm hover:bg-blue-500">
+            Buscar
+          </button>
+        </NavLink>
       </div>
 
       <div className="w-full p-5 mb-5">
