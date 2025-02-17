@@ -13,3 +13,6 @@ Tecnologias utilizadas:
 - [React Router](https://reactrouter.com/)
 - [React Icons](https://react-icons.github.io/react-icons/)
 - [React Responsive Carousel](https://www.npmjs.com/package/react-responsive-carousel)
+- [React Hook Form](https://www.react-hook-form.com/)
+- [Yup](https://www.npmjs.com/package/yup/v/1.0.0-alpha.3) para validação dos formulários.
+- [Hook Forms Resolvers](https://www.npmjs.com/package/@hookform/resolvers) faz a ligação do Yup com o React Hook Form.

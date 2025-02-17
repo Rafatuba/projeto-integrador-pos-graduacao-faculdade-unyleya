@@ -1,6 +1,8 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 export default function Header() {
+  const navigate = useNavigate();
+
   return (
     <header className="flex justify-between items-center py-4 px-4 bg-primary text-white fixed z-50 top-0 w-full">
       <h1 className="text-3xl">
@@ -15,7 +17,10 @@ export default function Header() {
             <NavLink to="/quemsomos">Quem somos</NavLink>
           </li>
           <li>
-            <button className="bg-secundary py-1 px-6 rounded-sm cursor-pointer hover:bg-orange-600 transition duration-200">
+            <button
+              className="bg-secundary py-1 px-6 rounded-sm cursor-pointer hover:bg-orange-600 transition duration-200"
+              onClick={() => navigate("/login")}
+            >
               Entrar
             </button>
           </li>

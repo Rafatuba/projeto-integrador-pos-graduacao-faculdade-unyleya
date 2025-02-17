@@ -1,6 +1,21 @@
+import { useForm, SubmitHandler } from "react-hook-form";
 import UserTemplate from "../../templates/userTemplate";
 
+type FaleProps = {
+  nome: string;
+  email: string;
+  mensagem: string;
+};
+
 export default function FaleConosco() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FaleProps>();
+
+  const onSubmit: SubmitHandler<FaleProps> = (data) => console.log(data);
+
   return (
     <UserTemplate>
       <div className="flex items-center justify-center p-20 w-full">
@@ -11,24 +26,48 @@ export default function FaleConosco() {
               Fale conosco através do formulário abaixo
             </p>
           </div>
-          <form className="flex flex-col w-full justify-center gap-8 px-14">
+          <form
+            onSubmit={handleSubmit(onSubmit)}
+            className="flex flex-col w-full justify-center gap-8 px-14"
+          >
             <input
+              {...register("nome", { required: true })}
               type="text"
               placeholder="Nome completo"
               className="border border-gray-300 rounded-sm h-11 shadow-md px-3"
             />
+            {errors.nome && (
+              <span className="text-red-600 text-sm mt-[-30px] px-2">
+                Digite seu nome
+              </span>
+            )}
+
             <input
+              {...register("email", { required: true })}
               type="email"
               placeholder="E-mail"
               className="border border-gray-300 rounded-sm h-11 shadow-md px-3"
             />
+            {errors.email && (
+              <span className="text-red-600 text-sm mt-[-30px] px-2">
+                Digite seu e-mail
+              </span>
+            )}
+
             <textarea
-              name="descricao"
-              id="descricao"
+              {...register("mensagem", { required: true })}
               placeholder="Escreva sua mensagem"
               className="border border-gray-300 rounded-sm h-64 shadow-md px-3 py-2 resize-none"
             ></textarea>
-            <button className="bg-primary h-11 text-white text-lg rounded-sm">
+            {errors.mensagem && (
+              <span className="text-red-600 text-sm mt-[-30px] px-2">
+                Digite sua mensagem
+              </span>
+            )}
+            <button
+              type="submit"
+              className="bg-primary h-11 text-white text-lg rounded-sm"
+            >
               Enviar
             </button>
           </form>

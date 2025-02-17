@@ -7,6 +7,8 @@ import Detalhes from "./pages/detalhes";
 import ResultadoBusca from "./pages/resultado-busca";
 import NotFound from "./pages/not-found";
 import FaleConosco from "./pages/fale-conosco";
+import Login from "./pages/login";
+import Cadastro from "./pages/cadastro";
 
 export default function App() {
   const router = createBrowserRouter([
@@ -33,6 +35,14 @@ export default function App() {
     {
       path: "/fale-conosco",
       element: <FaleConosco />,
+    },
+    {
+      path: "/login",
+      element: <Login />,
+    },
+    {
+      path: "/cadastro",
+      element: <Cadastro />,
     },
     {
       path: "*",
