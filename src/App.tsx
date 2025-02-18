@@ -9,6 +9,8 @@ import NotFound from "./pages/not-found";
 import FaleConosco from "./pages/fale-conosco";
 import Login from "./pages/login";
 import Cadastro from "./pages/cadastro";
+import Dashboard from "./pages/dashboard";
+import UserProducts from "./pages/user-products";
 
 export default function App() {
   const router = createBrowserRouter([
@@ -43,6 +45,14 @@ export default function App() {
     {
       path: "/cadastro",
       element: <Cadastro />,
+    },
+    {
+      path: "/dashboard",
+      element: <Dashboard />,
+    },
+    {
+      path: "/meus-anuncios",
+      element: <UserProducts />,
     },
     {
       path: "*",
