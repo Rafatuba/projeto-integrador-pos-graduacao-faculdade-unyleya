@@ -12,7 +12,7 @@ export default function UserProducts() {
           <h2 className="text-lg font-medium">Meus anúncios</h2>
           <button
             className="bg-secundary text-white py-1 px-6 rounded-sm cursor-pointer hover:bg-orange-600 transition duration-200"
-            onClick={() => navigate("#")}
+            onClick={() => navigate("/form-product")}
           >
             Adicionar
           </button>

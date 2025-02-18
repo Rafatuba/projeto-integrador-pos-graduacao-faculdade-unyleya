@@ -11,6 +11,7 @@ import Login from "./pages/login";
 import Cadastro from "./pages/cadastro";
 import Dashboard from "./pages/dashboard";
 import UserProducts from "./pages/user-products";
+import FormProduct from "./pages/form-product";
 
 export default function App() {
   const router = createBrowserRouter([
@@ -53,6 +54,10 @@ export default function App() {
     {
       path: "/meus-anuncios",
       element: <UserProducts />,
+    },
+    {
+      path: "/form-product",
+      element: <FormProduct />,
     },
     {
       path: "*",
