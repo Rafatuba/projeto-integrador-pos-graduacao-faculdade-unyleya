@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
-import CardProduto from "../../components/card-produto";
 import AdminTemplate from "../../templates/adminTemplate";
+import CardProdutoAdmin from "../../components/card-produto-admin";
 
 export default function UserProducts() {
   const navigate = useNavigate();
@@ -20,7 +20,7 @@ export default function UserProducts() {
 
         <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-4 ">
           {Array.from({ length: 5 }).map(() => (
-            <CardProduto />
+            <CardProdutoAdmin />
           ))}
         </div>
         <p className="pt-8">Total: 5 anúncios</p>
