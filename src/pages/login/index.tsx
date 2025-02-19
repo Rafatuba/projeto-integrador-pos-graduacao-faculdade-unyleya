@@ -1,5 +1,5 @@
 import { useForm, SubmitHandler } from "react-hook-form";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import AuthTemplate from "../../templates/authTemplate";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -21,6 +21,8 @@ const schema = yup.object().shape({
 });
 
 export default function Login() {
+  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
@@ -66,6 +68,7 @@ export default function Login() {
             <button
               type="submit"
               className="bg-primary h-11 text-white text-lg rounded-sm hover:bg-blue-900"
+              onClick={() => navigate("/meus-anuncios")}
             >
               Entrar
             </button>
