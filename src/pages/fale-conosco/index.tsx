@@ -1,5 +1,7 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 import UserTemplate from "../../templates/userTemplate";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
 
 type FaleProps = {
   nome: string;
@@ -7,12 +9,21 @@ type FaleProps = {
   mensagem: string;
 };
 
+const schema = yup.object().shape({
+  nome: yup.string().required("Digite seu nome"),
+  email: yup
+    .string()
+    .email("Digite um e-mail válido")
+    .required("Digite seu e-mail"),
+  mensagem: yup.string().required("Digite sua mensagem"),
+});
+
 export default function FaleConosco() {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<FaleProps>();
+  } = useForm<FaleProps>({ resolver: yupResolver(schema) });
 
   const onSubmit: SubmitHandler<FaleProps> = (data) => console.log(data);
 
@@ -31,37 +42,36 @@ export default function FaleConosco() {
             className="flex flex-col w-full justify-center gap-8 px-14"
           >
             <input
-              {...register("nome", { required: true })}
+              {...register("nome")}
               type="text"
               placeholder="Nome completo"
               className="border border-gray-300 rounded-sm h-11 shadow-md px-3"
             />
             {errors.nome && (
               <span className="text-red-600 text-sm mt-[-30px] px-2">
-                Digite seu nome
+                {errors.nome.message}
               </span>
             )}
 
             <input
-              {...register("email", { required: true })}
-              type="email"
-              placeholder="E-mail"
+              {...register("email")}
+              placeholder="Digite seu e-mail"
               className="border border-gray-300 rounded-sm h-11 shadow-md px-3"
             />
             {errors.email && (
               <span className="text-red-600 text-sm mt-[-30px] px-2">
-                Digite seu e-mail
+                {errors.email.message}
               </span>
             )}
 
             <textarea
-              {...register("mensagem", { required: true })}
+              {...register("mensagem")}
               placeholder="Escreva sua mensagem"
               className="border border-gray-300 rounded-sm h-64 shadow-md px-3 py-2 resize-none"
             ></textarea>
             {errors.mensagem && (
               <span className="text-red-600 text-sm mt-[-30px] px-2">
-                Digite sua mensagem
+                {errors.mensagem.message}
               </span>
             )}
             <button
