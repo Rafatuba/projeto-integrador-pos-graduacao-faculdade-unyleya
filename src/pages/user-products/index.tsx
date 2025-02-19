@@ -14,7 +14,7 @@ export default function UserProducts() {
             className="bg-secundary text-white py-1 px-6 rounded-sm cursor-pointer hover:bg-orange-600 transition duration-200"
             onClick={() => navigate("/form-product")}
           >
-            Adicionar
+            Criar anúncio
           </button>
         </div>
 

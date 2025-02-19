@@ -151,13 +151,20 @@ export default function FormProduct() {
                 </span>
               )}
             </div>
-
-            <button
-              type="submit"
-              className="bg-primary h-11 text-white text-lg rounded-sm hover:bg-blue-900 w-full row-span-2"
-            >
-              Salvar
-            </button>
+            <div className="flex gap-4 mt-4 self-end">
+              <button
+                className="bg-primary text-white w-32 py-2 rounded-md hover:bg-blue-400  duration-200 cursor-pointer"
+                onClick={() => alert("Clicou")}
+              >
+                Salvar
+              </button>
+              <button
+                className="text-primary border-2 w-32 py-2 rounded-md hover:bg-blue-400 hover:text-white duration-200 cursor-pointer"
+                onClick={() => alert("Clicou em cancelar")}
+              >
+                Cancelar
+              </button>
+            </div>
           </form>
         </section>
       </div>
