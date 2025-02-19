@@ -16,3 +16,4 @@ Tecnologias utilizadas:
 - [React Hook Form](https://www.react-hook-form.com/)
 - [Yup](https://www.npmjs.com/package/yup/v/1.0.0-alpha.3) para validação dos formulários.
 - [Hook Forms Resolvers](https://www.npmjs.com/package/@hookform/resolvers) faz a ligação do Yup com o React Hook Form.
+- [React Modal](https://www.npmjs.com/package/react-modal)
