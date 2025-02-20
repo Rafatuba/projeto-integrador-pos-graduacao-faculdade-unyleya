@@ -7,3 +7,9 @@ export async function getApiRecentsProducts(): Promise<
 > {
   return await api.get("/products/recents");
 }
+
+export async function getApiRecommendedProducts(): Promise<
+  AxiosResponse<Product[], any>
+> {
+  return await api.get("/products/recommended");
+}

@@ -3,12 +3,13 @@ import CardProduto from "../../components/card-produto";
 import Carrossel from "../../components/carrossel";
 import Categorias from "../../components/categorias";
 import UserTemplate from "../../templates/userTemplate";
-import { getApiRecentsProducts } from "./services";
+import { getApiRecentsProducts, getApiRecommendedProducts } from "./services";
 import { useEffect, useState } from "react";
 import { Product } from "./types";
 
 export default function Home() {
   const [recentProducts, setRecentProducts] = useState<Product[]>([]);
+  const [recommendedProducts, setRecommendedProducts] = useState<Product[]>([]);
 
   async function getRecentsProducts() {
     try {
@@ -19,8 +20,18 @@ export default function Home() {
     }
   }
 
+  async function getRecommendedProducts() {
+    try {
+      const response = await getApiRecommendedProducts();
+      setRecommendedProducts(response.data);
+    } catch (error) {
+      alert("Erro ao buscar produtos recomendados");
+    }
+  }
+
   useEffect(() => {
     getRecentsProducts();
+    getRecommendedProducts();
   }, []);
 
   return (
@@ -44,13 +55,14 @@ export default function Home() {
         <h2 className="text-lg font-medium mb-4">Produtos recentes</h2>
         <div className="flex flex-wrap gap-4">
           {recentProducts.map((product) => (
-            <CardProduto key={product._id} />
+            <CardProduto
+              key={product._id}
+              name={product.name}
+              img={product.url1}
+              manufacturer={product.manufacturer}
+              price={`R$ ${product.price.toFixed(2).toString()}`}
+            />
           ))}
-          {/* <CardProduto />
-          <CardProduto />
-          <CardProduto />
-          <CardProduto />
-          <CardProduto /> */}
         </div>
         <NavLink to="/produtos">
           <p className="text-end mt-4 text-blue-400">Ver mais</p>
@@ -62,10 +74,15 @@ export default function Home() {
       <div className="w-full p-5 mb-5">
         <h2 className="text-lg font-medium mb-4">Anúncios</h2>
         <div className="flex flex-wrap gap-4">
-          <CardProduto />
-          <CardProduto />
-          <CardProduto />
-          <CardProduto />
+          {recommendedProducts.map((product) => (
+            <CardProduto
+              key={product._id}
+              name={product.name}
+              img={product.url1}
+              manufacturer={product.manufacturer}
+              price={`R$ ${product.price.toFixed(2).toString()}`}
+            />
+          ))}
         </div>
         <p className="text-end mt-4 text-blue-400">Ver mais</p>
       </div>
