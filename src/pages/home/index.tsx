@@ -6,27 +6,34 @@ import UserTemplate from "../../templates/userTemplate";
 import { getApiRecentsProducts, getApiRecommendedProducts } from "./services";
 import { useEffect, useState } from "react";
 import { Product } from "./types";
+import ListLoading from "../../components/list-loading";
 
 export default function Home() {
   const [recentProducts, setRecentProducts] = useState<Product[]>([]);
   const [recommendedProducts, setRecommendedProducts] = useState<Product[]>([]);
 
+  const [loading, setLoading] = useState(false);
+
   async function getRecentsProducts() {
+    setLoading(true);
     try {
       const response = await getApiRecentsProducts();
       setRecentProducts(response.data);
     } catch (error) {
       alert("Erro ao buscar produtos recentes");
     }
+    setLoading(false);
   }
 
   async function getRecommendedProducts() {
+    setLoading(true);
     try {
       const response = await getApiRecommendedProducts();
       setRecommendedProducts(response.data);
     } catch (error) {
       alert("Erro ao buscar produtos recomendados");
     }
+    setLoading(false);
   }
 
   useEffect(() => {
@@ -53,6 +60,7 @@ export default function Home() {
 
       <div className="w-full p-5 mb-5">
         <h2 className="text-lg font-medium mb-4">Produtos recentes</h2>
+        {loading && <ListLoading />}
         <div className="flex flex-wrap gap-4">
           {recentProducts.map((product) => (
             <CardProduto
@@ -73,6 +81,7 @@ export default function Home() {
 
       <div className="w-full p-5 mb-5">
         <h2 className="text-lg font-medium mb-4">Anúncios</h2>
+        {loading && <ListLoading />}
         <div className="flex flex-wrap gap-4">
           {recommendedProducts.map((product) => (
             <CardProduto
