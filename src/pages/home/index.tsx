@@ -3,8 +3,26 @@ import CardProduto from "../../components/card-produto";
 import Carrossel from "../../components/carrossel";
 import Categorias from "../../components/categorias";
 import UserTemplate from "../../templates/userTemplate";
+import { getApiRecentsProducts } from "./services";
+import { useEffect, useState } from "react";
+import { Product } from "./types";
 
 export default function Home() {
+  const [recentProducts, setRecentProducts] = useState<Product[]>([]);
+
+  async function getRecentsProducts() {
+    try {
+      const response = await getApiRecentsProducts();
+      setRecentProducts(response.data);
+    } catch (error) {
+      alert("Erro ao buscar produtos recentes");
+    }
+  }
+
+  useEffect(() => {
+    getRecentsProducts();
+  }, []);
+
   return (
     <UserTemplate>
       <Carrossel />
@@ -25,11 +43,14 @@ export default function Home() {
       <div className="w-full p-5 mb-5">
         <h2 className="text-lg font-medium mb-4">Produtos recentes</h2>
         <div className="flex flex-wrap gap-4">
+          {recentProducts.map((product) => (
+            <CardProduto key={product._id} />
+          ))}
+          {/* <CardProduto />
           <CardProduto />
           <CardProduto />
           <CardProduto />
-          <CardProduto />
-          <CardProduto />
+          <CardProduto /> */}
         </div>
         <NavLink to="/produtos">
           <p className="text-end mt-4 text-blue-400">Ver mais</p>

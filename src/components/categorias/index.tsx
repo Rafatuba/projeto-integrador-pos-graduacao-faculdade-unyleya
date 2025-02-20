@@ -42,8 +42,11 @@ export default function Categorias() {
       <h2 className="text-white text-lg font-medium mb-4">Categorias</h2>
       <NavLink to="/resultado-busca">
         <div className="flex justify-around items-center">
-          {itensCategoria.map((item) => (
-            <div className="flex flex-col items-center justify-center gap-2">
+          {itensCategoria.map((item, index) => (
+            <div
+              key={index}
+              className="flex flex-col items-center justify-center gap-2"
+            >
               <span className="text-3xl bg-white text-primary rounded-full p-3">
                 {item.icone}
               </span>
