@@ -72,7 +72,7 @@ export default function Home() {
             />
           ))}
         </div>
-        <NavLink to="/produtos">
+        <NavLink to="/todos-produtos-recentes">
           <p className="text-end mt-4 text-blue-400">Ver mais</p>
         </NavLink>
       </div>

@@ -2,7 +2,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import QuemSomos from "./pages/quemsomos";
 import Home from "./pages/home";
-import ListProducts from "./pages/list-products";
+import AllRecentsProducts from "./pages/all-recents-products";
 import Detalhes from "./pages/detalhes";
 import ResultadoBusca from "./pages/resultado-busca";
 import NotFound from "./pages/not-found";
@@ -24,8 +24,8 @@ export default function App() {
       element: <QuemSomos />,
     },
     {
-      path: "/produtos",
-      element: <ListProducts />,
+      path: "/todos-produtos-recentes",
+      element: <AllRecentsProducts />,
     },
     {
       path: "/detalhes",
