@@ -93,7 +93,9 @@ export default function Home() {
             />
           ))}
         </div>
-        <p className="text-end mt-4 text-blue-400">Ver mais</p>
+        <NavLink to="/todos-produtos">
+          <p className="text-end mt-4 text-blue-400">Ver todos</p>
+        </NavLink>
       </div>
     </UserTemplate>
   );

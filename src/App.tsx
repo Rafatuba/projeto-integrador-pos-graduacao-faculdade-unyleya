@@ -12,6 +12,7 @@ import Cadastro from "./pages/cadastro";
 import Dashboard from "./pages/dashboard";
 import UserProducts from "./pages/user-products";
 import FormProduct from "./pages/form-product";
+import AllProducts from "./pages/all-products";
 
 export default function App() {
   const router = createBrowserRouter([
@@ -26,6 +27,10 @@ export default function App() {
     {
       path: "/todos-produtos-recentes",
       element: <AllRecentsProducts />,
+    },
+    {
+      path: "/todos-produtos",
+      element: <AllProducts />,
     },
     {
       path: "/detalhes",
