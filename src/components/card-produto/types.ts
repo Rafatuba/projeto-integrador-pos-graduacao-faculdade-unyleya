@@ -3,4 +3,5 @@ export type CardProps = {
   img: string;
   manufacturer: string;
   price: string;
+  id: string;
 };

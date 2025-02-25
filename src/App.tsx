@@ -33,7 +33,7 @@ export default function App() {
       element: <AllProducts />,
     },
     {
-      path: "/detalhes",
+      path: "/detalhes/:id",
       element: <Detalhes />,
     },
     {

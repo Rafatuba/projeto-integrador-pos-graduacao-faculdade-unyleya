@@ -38,6 +38,7 @@ export default function ResultadoBusca() {
           {allProducts.map((product) => (
             <CardProduto
               key={product._id}
+              id={product._id}
               name={product.name}
               manufacturer={product.manufacturer}
               img={product.url1}

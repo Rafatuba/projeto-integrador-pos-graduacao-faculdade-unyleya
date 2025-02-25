@@ -1,14 +1,39 @@
 import { Carousel } from "react-responsive-carousel";
 import UserTemplate from "../../templates/userTemplate";
+import { useParams } from "react-router-dom";
+import { getApiDetailsProducts } from "./services";
+import { useEffect, useState } from "react";
+import { DetalhesProps } from "./types";
 
 export default function Detalhes() {
+  const [product, setProduct] = useState<DetalhesProps>({} as DetalhesProps);
+
+  const params = useParams();
+  const idProduct = params?.id;
+
+  async function getDetailsProduct() {
+    try {
+      const response = await getApiDetailsProducts(idProduct!);
+      setProduct(response.data);
+      console.log(response.data);
+    } catch (error) {
+      alert("Erro ao buscar produto");
+    }
+  }
+
+  useEffect(() => {
+    getDetailsProduct();
+  }, []);
+
   return (
     <UserTemplate>
       <h1 className="text-2xl font-bold text-gray-800 w-2xl my-8">
-        Novo Echo Spot com Alexa (2024) | Despertador inteligente com som
-        vibrante
+        {product.name}
       </h1>
-      <div className="flex items-center justify-center gap-12">
+      <div
+        className="flex items-center justify-center gap-12"
+        key={product._id}
+      >
         <div className="w-md">
           <Carousel
             infiniteLoop
@@ -18,13 +43,10 @@ export default function Detalhes() {
             showIndicators={false}
           >
             <div>
-              <img src="https://m.media-amazon.com/images/I/71anQJA7UcL._AC_SL1500_.jpg" />
+              <img src={product.url1} />
             </div>
             <div>
-              <img src="https://m.media-amazon.com/images/I/71CrkAgNKNL._AC_SL1500_.jpg" />
-            </div>
-            <div>
-              <img src="https://m.media-amazon.com/images/I/71JD11eJ+5L._AC_SL1500_.jpg" />
+              <img src={product.url2} />
             </div>
           </Carousel>
         </div>
@@ -43,29 +65,21 @@ export default function Detalhes() {
           </div>
           <div className="shadow-md p-8 rounded-lg">
             <p>Preço</p>
-            <p className="text-4xl text-center">R$ 459,90</p>
+            <p className="text-4xl text-center">R$ {product.price}</p>
           </div>
         </div>
       </div>
       <div className="flex flex-col my-10 max-w-6xl">
         <h2 className="text-xl font-bold mb-5">Descrição</h2>
+        <p
+          className="text-gray-600 text-lg"
+          dangerouslySetInnerHTML={{ __html: product.description }}
+        ></p>
         <p className="text-gray-600 text-lg">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident
-          nobis quos at earum saepe distinctio fuga minima nemo dolorum,
-          molestiae maxime voluptatem iusto quod atque corporis soluta totam
-          repellendus exercitationem? Lorem ipsum dolor sit amet consectetur
-          adipisicing elit. Iusto, consectetur suscipit aut asperiores at dolor
-          tempore sunt accusantium illum consequuntur aliquam voluptates natus
-          reiciendis vero cupiditate corrupti in itaque nulla!
-        </p>
-        <p className="text-gray-600 text-lg">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident
-          nobis quos at earum saepe distinctio fuga minima nemo dolorum,
-          molestiae maxime voluptatem iusto quod atque corporis soluta totam
-          repellendus exercitationem? Lorem ipsum dolor sit amet consectetur
-          adipisicing elit. Iusto, consectetur suscipit aut asperiores at dolor
-          tempore sunt accusantium illum consequuntur aliquam voluptates natus
-          reiciendis vero cupiditate corrupti in itaque nulla!
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam
+          vitae quod consectetur ducimus quaerat porro, eum consequatur
+          necessitatibus blanditiis repudiandae, placeat illo ab labore ea!
+          Perspiciatis natus eos vel nemo!
         </p>
       </div>
     </UserTemplate>
