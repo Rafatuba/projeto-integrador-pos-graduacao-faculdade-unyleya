@@ -37,7 +37,7 @@ export default function App() {
       element: <Detalhes />,
     },
     {
-      path: "/resultado-busca",
+      path: "/products/busca/:product",
       element: <ResultadoBusca />,
     },
     {

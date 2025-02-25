@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import CardProduto from "../../components/card-produto";
 import Carrossel from "../../components/carrossel";
 import Categorias from "../../components/categorias";
@@ -11,8 +11,11 @@ import ListLoading from "../../components/list-loading";
 export default function Home() {
   const [recentProducts, setRecentProducts] = useState<Product[]>([]);
   const [recommendedProducts, setRecommendedProducts] = useState<Product[]>([]);
+  const [inputSearch, setInputSearch] = useState("");
 
   const [loading, setLoading] = useState(false);
+
+  const navigate = useNavigate();
 
   async function getRecentsProducts() {
     setLoading(true);
@@ -48,14 +51,17 @@ export default function Home() {
       <div className="flex justify-center items-center gap-3 w-full p-5">
         <input
           type="text"
-          className="w-3xl h-12 rounded-sm my-6 p-3 text-lg border border-gray-300"
-          placeholder="O que você procura?"
+          placeholder="O que deseja buscar?"
+          className="border border-gray-300 rounded-sm h-11 shadow-md px-3 w-[80%]"
+          onChange={(e) => setInputSearch(e.target.value)}
         />
-        <NavLink to="/resultado-busca">
-          <button className="bg-primary text-white py-2 px-5 text-lg h-12 rounded-sm hover:bg-blue-500">
-            Buscar
-          </button>
-        </NavLink>
+
+        <button
+          onClick={() => navigate(`/products/busca/${inputSearch}`)}
+          className="bg-primary text-white font-medium rounded-sm h-11 w-24"
+        >
+          Buscar
+        </button>
       </div>
 
       <div className="w-full p-5 mb-5">
