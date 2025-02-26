@@ -2,6 +2,9 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import AdminTemplate from "../../templates/adminTemplate";
+import { useQuill } from "react-quilljs";
+import "quill/dist/quill.snow.css";
+import { useEffect } from "react";
 
 type CadastroProps = {
   nome: string;
@@ -24,13 +27,43 @@ const schemaCadastro = yup.object().shape({
 });
 
 export default function FormProduct() {
+  const { quill, quillRef } = useQuill();
+
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm<CadastroProps>({ resolver: yupResolver(schemaCadastro) });
 
   const onSubmit: SubmitHandler<CadastroProps> = (data) => console.log(data);
+
+  useEffect(() => {
+    if (quill) {
+      const handleTextChange = () => {
+        const htmlContent = quill.root.innerHTML;
+
+        // Verificando se o conteúdo é vazio ou apenas contém <p><br></p>
+        const isEmpty =
+          htmlContent === "<p><br></p>" || htmlContent.trim() === "";
+
+        // Se estiver vazio, marca o campo como erro
+        if (isEmpty) {
+          setValue("descricao", ""); // Definindo o valor como vazio para o React Hook Form
+        } else {
+          setValue("descricao", htmlContent); // Atualiza com o conteúdo válido
+        }
+      };
+
+      // Configura o evento de mudança de texto
+      quill.on("text-change", handleTextChange);
+
+      // Cleanup para remover o evento quando o componente for desmontado
+      return () => {
+        quill.off("text-change", handleTextChange);
+      };
+    }
+  }, [quill, setValue]); // Dependências: quill e setValue
 
   return (
     <AdminTemplate>
@@ -136,17 +169,13 @@ export default function FormProduct() {
               </div>
             </div>
 
-            <div>
+            <div className="flex flex-col w-full h-80">
               <label htmlFor="">Descrição do produto</label>
-              <textarea
-                {...register("descricao")}
-                className="border border-gray-300 rounded-sm h-80 shadow-md px-3 w-full resize-none"
-                name="descricao"
-                id="descrica"
-                placeholder="Descreva as informações sobre o produto"
-              ></textarea>
+              <div className="w-full h-full mb-8">
+                <div ref={quillRef} />
+              </div>
               {errors.descricao && (
-                <span className="text-red-600 text-sm mt-[-30px] px-2">
+                <span className="text-red-600 text-sm mt-4 px-2">
                   {errors.descricao.message}
                 </span>
               )}
