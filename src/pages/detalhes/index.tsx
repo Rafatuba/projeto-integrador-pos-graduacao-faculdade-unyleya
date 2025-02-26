@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import { getApiDetailsProducts } from "./services";
 import { useEffect, useState } from "react";
 import { DetalhesProps } from "./types";
+import { toast, ToastContainer } from "react-toastify";
 
 export default function Detalhes() {
   const [product, setProduct] = useState<DetalhesProps>({} as DetalhesProps);
@@ -11,13 +12,22 @@ export default function Detalhes() {
   const params = useParams();
   const idProduct = params?.id;
 
+  const toastError = () =>
+    toast.error("Falha ao buscar produto. Tente novamente mais tarde!", {
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+      toastId: "toastId",
+    });
+
   async function getDetailsProduct() {
     try {
       const response = await getApiDetailsProducts(idProduct!);
       setProduct(response.data);
       console.log(response.data);
     } catch (error) {
-      alert("Erro ao buscar produto");
+      toastError();
     }
   }
 
@@ -81,6 +91,7 @@ export default function Detalhes() {
           necessitatibus blanditiis repudiandae, placeat illo ab labore ea!
           Perspiciatis natus eos vel nemo!
         </p>
+        <ToastContainer />
       </div>
     </UserTemplate>
   );

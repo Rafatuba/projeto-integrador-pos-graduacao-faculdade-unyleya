@@ -20,3 +20,4 @@ Tecnologias utilizadas:
 - [Axios](https://axios-http.com/ptbr/)
 - [React-loading-skeleton](https://www.npmjs.com/package/react-loading-skeleton)
 - [React-Quilljs](https://www.npmjs.com/package/react-quilljs)
+- [React-Toastify](https://www.npmjs.com/package/react-toastify)
