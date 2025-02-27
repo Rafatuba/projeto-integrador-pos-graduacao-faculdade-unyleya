@@ -1,13 +1,11 @@
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { NavLink, useNavigate } from "react-router-dom";
 import AuthTemplate from "../../templates/authTemplate";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-
-type LoginProps = {
-  email: string;
-  password: string;
-};
+import { LoginProps } from "./types";
+import { auth } from "./services";
+import { toast, ToastContainer } from "react-toastify";
 
 const schema = yup.object().shape({
   email: yup
@@ -16,8 +14,8 @@ const schema = yup.object().shape({
     .required("Digite seu e-mail"),
   password: yup
     .string()
-    .min(6, "A senha precisa ter pelo menos 6 caracteres")
-    .required("Digite sua senha"),
+    .required("Digite sua senha")
+    .min(6, "A senha precisa ter pelo menos 6 caracteres"),
 });
 
 export default function Login() {
@@ -29,7 +27,29 @@ export default function Login() {
     formState: { errors },
   } = useForm<LoginProps>({ resolver: yupResolver(schema) });
 
-  const onSubmit: SubmitHandler<LoginProps> = (data) => console.log(data);
+  const toastError = () =>
+    toast.error("Falha ao entrar. Tente novamente.", {
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+      toastId: "toastId",
+    });
+
+  async function logar(values: LoginProps) {
+    try {
+      const response = await auth(values);
+      if (response) {
+        navigate("/dashboard");
+      }
+    } catch (error: any) {
+      {
+        `${error.message}` === "Request failed with status code 401"
+          ? toast.error("E-mail ou senha incorretos", {})
+          : toastError();
+      }
+    }
+  }
 
   return (
     <AuthTemplate>
@@ -40,7 +60,7 @@ export default function Login() {
             <p className="font-medium mb-5">Acesse sua conta</p>
           </div>
           <form
-            onSubmit={handleSubmit(onSubmit)}
+            onSubmit={handleSubmit(logar)}
             className="flex flex-col w-full justify-center gap-8 px-14"
           >
             <input
@@ -68,7 +88,7 @@ export default function Login() {
             <button
               type="submit"
               className="bg-primary h-11 text-white text-lg rounded-sm hover:bg-blue-900"
-              onClick={() => navigate("/meus-anuncios")}
+              // onClick={() => navigate("/meus-anuncios")}
             >
               Entrar
             </button>
@@ -79,6 +99,7 @@ export default function Login() {
             </p>
           </NavLink>
         </section>
+        <ToastContainer />
       </div>
     </AuthTemplate>
   );

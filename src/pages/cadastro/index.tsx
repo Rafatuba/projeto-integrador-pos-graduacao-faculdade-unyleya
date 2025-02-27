@@ -1,4 +1,4 @@
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { NavLink } from "react-router-dom";
 import AuthTemplate from "../../templates/authTemplate";
 import * as yup from "yup";
@@ -38,8 +38,6 @@ export default function Cadastro() {
     reset,
     formState: { errors },
   } = useForm<CadastroProps>({ resolver: yupResolver(schemaCadastro) });
-
-  // const onSubmit: SubmitHandler<CadastroProps> = (data) => console.log(data);
 
   const toastError = () =>
     toast.error("Falha ao se cadastrar. Tente novamente mais tarde.", {

@@ -25,7 +25,6 @@ export default function Detalhes() {
     try {
       const response = await getApiDetailsProducts(idProduct!);
       setProduct(response.data);
-      console.log(response.data);
     } catch (error) {
       toastError();
     }
