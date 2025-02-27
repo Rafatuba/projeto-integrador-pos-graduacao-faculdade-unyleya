@@ -3,24 +3,17 @@ import { NavLink } from "react-router-dom";
 import AuthTemplate from "../../templates/authTemplate";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-
-type CadastroProps = {
-  nome: string;
-  local: string;
-  celular: string;
-  email: string;
-  password: string;
-};
+import { CadastroProps } from "./types";
+import { registerUser } from "./services";
+import { toast, ToastContainer } from "react-toastify";
 
 const schemaCadastro = yup.object().shape({
   nome: yup
     .string()
     .required("Digite seu nome completo")
     .min(5, "Digite seu nome completo"),
-  local: yup
-    .string()
-    .required("Digite a cidade e estado")
-    .min(5, "Digite a cidade e o estado"),
+  cidade: yup.string().required("Digite a cidade").min(5, "Digite a cidade"),
+  estado: yup.string().required("Digite o estado").min(2, "Digite o estado"),
   celular: yup
     .string() // Usando string para aceitar valores vazios
     .min(11, "Digite um celular válido")
@@ -42,10 +35,44 @@ export default function Cadastro() {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<CadastroProps>({ resolver: yupResolver(schemaCadastro) });
 
-  const onSubmit: SubmitHandler<CadastroProps> = (data) => console.log(data);
+  // const onSubmit: SubmitHandler<CadastroProps> = (data) => console.log(data);
+
+  const toastError = () =>
+    toast.error("Falha ao se cadastrar. Tente novamente mais tarde.", {
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+      toastId: "toastId",
+    });
+
+  const toastSuccess = () =>
+    toast.success("Cadastro realizado com sucesso!", {
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+      toastId: "toastId",
+    });
+
+  async function createUser(values: CadastroProps) {
+    try {
+      const response = await registerUser(values);
+      console.log(response.data);
+      toastSuccess();
+      reset();
+    } catch (error: any) {
+      {
+        `${error.message}` === "Request failed with status code 400"
+          ? toast.error("E-mail já cadastrado", {})
+          : toastError();
+      }
+    }
+  }
 
   return (
     <AuthTemplate>
@@ -56,7 +83,7 @@ export default function Cadastro() {
             <p className="font-medium mb-5">Cadastrar-se</p>
           </div>
           <form
-            onSubmit={handleSubmit(onSubmit)}
+            onSubmit={handleSubmit(createUser)}
             className="flex flex-col w-full justify-center gap-8 px-14"
           >
             <input
@@ -71,14 +98,25 @@ export default function Cadastro() {
               </span>
             )}
             <input
-              {...register("local")}
+              {...register("cidade")}
               type="text"
-              placeholder="Cidade-estado"
+              placeholder="Cidade"
               className="border border-gray-300 rounded-sm h-11 shadow-md px-3"
             />
-            {errors.local && (
+            {errors.cidade && (
               <span className="text-red-600 text-sm mt-[-30px] px-2">
-                {errors.local.message}
+                {errors.cidade.message}
+              </span>
+            )}
+            <input
+              {...register("estado")}
+              type="text"
+              placeholder="Estado"
+              className="border border-gray-300 rounded-sm h-11 shadow-md px-3"
+            />
+            {errors.estado && (
+              <span className="text-red-600 text-sm mt-[-30px] px-2">
+                {errors.estado.message}
               </span>
             )}
             <input
@@ -128,6 +166,7 @@ export default function Cadastro() {
             </p>
           </NavLink>
         </section>
+        <ToastContainer />
       </div>
     </AuthTemplate>
   );
