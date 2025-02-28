@@ -42,10 +42,7 @@ export default function Login() {
     try {
       const response = await auth(values);
       setToken(response.data?.token);
-
-      if (response) {
-        navigate("/dashboard");
-      }
+      if (response) navigate("/dashboard");
     } catch (error: any) {
       {
         `${error.message}` === "Request failed with status code 401"
