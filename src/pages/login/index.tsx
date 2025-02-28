@@ -42,7 +42,7 @@ export default function Login() {
     try {
       const response = await auth(values);
       setToken(response.data?.token);
-      console.log(response.data);
+
       if (response) {
         navigate("/dashboard");
       }
