@@ -6,6 +6,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { LoginProps } from "./types";
 import { auth } from "./services";
 import { toast, ToastContainer } from "react-toastify";
+import { useAuthSessionStore } from "../../hooks/use-auth-session";
 
 const schema = yup.object().shape({
   email: yup
@@ -19,6 +20,7 @@ const schema = yup.object().shape({
 });
 
 export default function Login() {
+  const { setToken } = useAuthSessionStore();
   const navigate = useNavigate();
 
   const {
@@ -39,6 +41,8 @@ export default function Login() {
   async function logar(values: LoginProps) {
     try {
       const response = await auth(values);
+      setToken(response.data?.token);
+      console.log(response.data);
       if (response) {
         navigate("/dashboard");
       }

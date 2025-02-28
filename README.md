@@ -21,3 +21,4 @@ Tecnologias utilizadas:
 - [React-loading-skeleton](https://www.npmjs.com/package/react-loading-skeleton)
 - [React-Quilljs](https://www.npmjs.com/package/react-quilljs)
 - [React-Toastify](https://www.npmjs.com/package/react-toastify)
+- [Zustand](https://zustand-demo.pmnd.rs/) para gerenciamento de estado.
