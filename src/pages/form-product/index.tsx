@@ -62,9 +62,9 @@ export default function FormProduct() {
       quill.on("text-change", handleTextChange);
 
       // Cleanup para remover o evento quando o componente for desmontado
-      return () => {
-        quill.off("text-change", handleTextChange);
-      };
+      // return () => {
+      //   quill.off("text-change", handleTextChange);
+      // };
     }
   }, [quill, setValue]); // Dependências: quill e setValue
 
