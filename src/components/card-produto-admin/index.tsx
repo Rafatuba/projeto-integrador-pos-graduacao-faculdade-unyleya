@@ -30,13 +30,13 @@ export default function CardProdutoAdmin(props: CardPropsAdmin) {
   const navigate = useNavigate();
 
   return (
-    <div className="flex flex-col justify-center items-center gap-4 h-max shadow-lg p-7 bg-white rounded-lg relative">
+    <div className="flex flex-col justify-around items-center gap-4 w-3xs h-96 shadow-lg px-3 py-4 bg-white rounded-lg box-border relative">
       <h1 className="text-center font-bold text-xl">{props.name}</h1>
       <img src={props.img} alt={props.name} className="w-40" />
       <p className="w-full font-bold text-lg">{props.manufacturer}</p>
       <p className="w-full">R$ {props.price}</p>
       <div className=" flex flex-col gap-2 text-2xl absolute bottom-5 right-5">
-        <NavLink to="/detalhes" title="Visualizar anúncio">
+        <NavLink to={`/detalhes/${props.id}`} title="Visualizar anúncio">
           <RiEyeLine />
         </NavLink>
         <button

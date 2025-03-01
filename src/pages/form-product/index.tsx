@@ -1,20 +1,14 @@
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import AdminTemplate from "../../templates/adminTemplate";
 import { useQuill } from "react-quilljs";
 import "quill/dist/quill.snow.css";
 import { useEffect } from "react";
-
-type CadastroProps = {
-  nome: string;
-  factory: string;
-  category: string;
-  price: string;
-  url1: string;
-  url2: string;
-  descricao: string;
-};
+import { useNavigate } from "react-router-dom";
+import { CadastroProps } from "./types";
+import { saveApiProducts } from "./services";
+import { useAuthSessionStore } from "../../hooks/use-auth-session";
 
 const schemaCadastro = yup.object().shape({
   nome: yup.string().required("Campo obrigatório"),
@@ -27,7 +21,9 @@ const schemaCadastro = yup.object().shape({
 });
 
 export default function FormProduct() {
+  const navigate = useNavigate();
   const { quill, quillRef } = useQuill();
+  const { token } = useAuthSessionStore();
 
   const {
     register,
@@ -36,7 +32,14 @@ export default function FormProduct() {
     formState: { errors },
   } = useForm<CadastroProps>({ resolver: yupResolver(schemaCadastro) });
 
-  const onSubmit: SubmitHandler<CadastroProps> = (data) => console.log(data);
+  async function saveProduct(values: CadastroProps) {
+    try {
+      const response = await saveApiProducts(values, token);
+      console.log(response.data);
+    } catch (error) {
+      alert("Erro ao salvar o produto");
+    }
+  }
 
   useEffect(() => {
     if (quill) {
@@ -73,7 +76,7 @@ export default function FormProduct() {
             <p className="font-medium mb-5">Preencha os campos abaixo:</p>
           </div>
           <form
-            onSubmit={handleSubmit(onSubmit)}
+            onSubmit={handleSubmit(saveProduct)}
             className="flex flex-col gap-5 w-full"
           >
             <div className="grid grid-cols-2 gap-3 w-full">
@@ -113,11 +116,12 @@ export default function FormProduct() {
                   {...register("category")}
                   className="border border-gray-300 rounded-sm h-11 shadow-md px-3 w-full"
                 >
-                  <optgroup label="Selecione a categoria">
-                    <option value={"jogos"}>Jogos</option>
-                    <option value={"notebooks"}>Notebooks</option>
-                    <option value={"cameras"}>Câmeras</option>
-                  </optgroup>
+                  <option value={""} disabled selected>
+                    Selecione a categoria
+                  </option>
+                  <option value={"jogos"}>Jogos</option>
+                  <option value={"notebooks"}>Notebooks</option>
+                  <option value={"cameras"}>Câmeras</option>
                 </select>
                 {errors.category && (
                   <span className="text-red-600 text-sm mt-[-30px] px-2">
@@ -171,7 +175,12 @@ export default function FormProduct() {
 
             <div className="flex flex-col w-full h-80">
               <label htmlFor="">Descrição do produto</label>
-              <div className="w-full h-full mb-8">
+              <div
+                style={{
+                  width: "100%",
+                  height: 250,
+                }}
+              >
                 <div ref={quillRef} />
               </div>
               {errors.descricao && (
@@ -182,14 +191,14 @@ export default function FormProduct() {
             </div>
             <div className="flex gap-4 mt-4 self-end">
               <button
+                type="submit"
                 className="bg-primary text-white w-32 py-2 rounded-md hover:bg-blue-400  duration-200 cursor-pointer"
-                onClick={() => alert("Clicou")}
               >
                 Salvar
               </button>
               <button
                 className="text-primary border-2 w-32 py-2 rounded-md hover:bg-blue-400 hover:text-white duration-200 cursor-pointer"
-                onClick={() => alert("Clicou em cancelar")}
+                onClick={() => navigate(-1)}
               >
                 Cancelar
               </button>
