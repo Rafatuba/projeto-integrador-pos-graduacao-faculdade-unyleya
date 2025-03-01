@@ -79,7 +79,7 @@ export default function FormProduct() {
             onSubmit={handleSubmit(saveProduct)}
             className="flex flex-col gap-5 w-full"
           >
-            <div className="flex flex-col gap-6 justify-center w-lg">
+            <div className="grid grid-cols-2 gap-3 w-full">
               <div>
                 <label htmlFor="">Nome do produto</label>
                 <input
