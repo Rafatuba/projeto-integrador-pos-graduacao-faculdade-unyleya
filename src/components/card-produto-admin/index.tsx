@@ -2,6 +2,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { RiDeleteBinLine, RiEdit2Line, RiEyeLine } from "react-icons/ri";
 import Modal from "react-modal";
 import { useState } from "react";
+import { CardPropsAdmin } from "./types";
 
 const estiloModal = {
   overlay: {
@@ -19,7 +20,7 @@ const estiloModal = {
 
 Modal.setAppElement("#root");
 
-export default function CardProdutoAdmin() {
+export default function CardProdutoAdmin(props: CardPropsAdmin) {
   const [modalIsOpen, setIsOpen] = useState(false);
 
   function openModal() {
@@ -30,25 +31,26 @@ export default function CardProdutoAdmin() {
 
   return (
     <div className="flex flex-col justify-center items-center gap-4 h-max shadow-lg p-7 bg-white rounded-lg relative">
-      <h1 className="text-center font-bold text-xl">Echo Spot com Alexa</h1>
-      <img
-        src="https://m.media-amazon.com/images/I/71anQJA7UcL._AC_SL1500_.jpg"
-        alt="imagem do produto"
-        className="w-40"
-      />
-      <p className="w-full font-bold text-lg">Amazon</p>
-      <p className="w-full">R$ 459,90</p>
+      <h1 className="text-center font-bold text-xl">{props.name}</h1>
+      <img src={props.img} alt={props.name} className="w-40" />
+      <p className="w-full font-bold text-lg">{props.manufacturer}</p>
+      <p className="w-full">R$ {props.price}</p>
       <div className=" flex flex-col gap-2 text-2xl absolute bottom-5 right-5">
-        <NavLink to="/detalhes">
+        <NavLink to="/detalhes" title="Visualizar anúncio">
           <RiEyeLine />
         </NavLink>
         <button
           onClick={() => navigate("/form-product")}
           className="cursor-pointer"
+          title="Editar anúncio"
         >
           <RiEdit2Line />
         </button>
-        <button onClick={openModal} className="cursor-pointer">
+        <button
+          onClick={openModal}
+          className="cursor-pointer"
+          title="Excluir anúncio"
+        >
           <RiDeleteBinLine />
         </button>
       </div>
