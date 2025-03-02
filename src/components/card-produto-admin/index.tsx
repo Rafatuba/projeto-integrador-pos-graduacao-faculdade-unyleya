@@ -3,6 +3,10 @@ import { RiDeleteBinLine, RiEdit2Line, RiEyeLine } from "react-icons/ri";
 import Modal from "react-modal";
 import { useState } from "react";
 import { CardPropsAdmin } from "./types";
+import { removeApiProduct } from "./services";
+import { useAuthSessionStore } from "../../hooks/use-auth-session";
+import { getApiMyProducts } from "../../pages/user-products/services";
+import { toast } from "react-toastify";
 
 const estiloModal = {
   overlay: {
@@ -23,11 +27,45 @@ Modal.setAppElement("#root");
 export default function CardProdutoAdmin(props: CardPropsAdmin) {
   const [modalIsOpen, setIsOpen] = useState(false);
 
+  const { token } = useAuthSessionStore();
+
   function openModal() {
     setIsOpen(true);
   }
 
   const navigate = useNavigate();
+
+  const toastSuccess = () => {
+    toast.success("Produto excluído com sucesso", {
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+      toastId: "toastId",
+    });
+  };
+
+  const toastError = () => {
+    toast.error("Erro ao excluir produto. Tente novamente mais tarde.", {
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+      toastId: "toastId",
+    });
+  };
+
+  async function removeProduct() {
+    try {
+      await removeApiProduct(props.id, token);
+      const response = await getApiMyProducts(token);
+      toastSuccess();
+      setIsOpen(false);
+      props.setMyProducts(response.data);
+    } catch (error) {
+      toastError();
+    }
+  }
 
   return (
     <div className="flex flex-col justify-around items-center gap-4 w-3xs h-96 shadow-lg px-3 py-4 bg-white rounded-lg box-border relative">
@@ -68,7 +106,7 @@ export default function CardProdutoAdmin(props: CardPropsAdmin) {
             <div className="flex gap-4 mt-4">
               <button
                 className="bg-primary text-white px-10 py-2 rounded-md hover:bg-blue-400  duration-200 cursor-pointer"
-                onClick={() => setIsOpen(false)}
+                onClick={() => removeProduct()}
               >
                 Sim
               </button>

@@ -28,6 +28,7 @@ export default function FormProduct() {
   const {
     register,
     handleSubmit,
+    reset,
     // setValue,
     formState: { errors },
   } = useForm<CadastroProps>({ resolver: yupResolver(schemaCadastro) });
@@ -36,6 +37,8 @@ export default function FormProduct() {
     try {
       const response = await saveApiProducts(values, token);
       console.log(response.data);
+      reset();
+      navigate(-1);
     } catch (error) {
       alert("Erro ao salvar o produto");
     }
@@ -182,6 +185,7 @@ export default function FormProduct() {
                 }}
               >
                 <textarea
+                  {...register("descricao")}
                   name="descricao"
                   id=""
                   className="border w-full h-[300px]"

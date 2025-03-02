@@ -6,7 +6,7 @@ export default function HeaderAdmin() {
   return (
     <header className="flex justify-between items-center py-4 px-4 bg-primary text-white fixed z-50 top-0 w-full">
       <h1 className="text-3xl">
-        <NavLink to="/">UnyBay</NavLink>
+        <NavLink to="/dashboard">UnyBay</NavLink>
       </h1>
       <nav>
         <ul className="flex gap-4 items-center">

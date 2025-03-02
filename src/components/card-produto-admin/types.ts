@@ -1,7 +1,10 @@
+import { Products } from "../../pages/user-products/types";
+
 export type CardPropsAdmin = {
   name: string;
   img: string;
   manufacturer: string;
   price: string;
   id: string;
+  setMyProducts: React.Dispatch<React.SetStateAction<Products[]>>;
 };

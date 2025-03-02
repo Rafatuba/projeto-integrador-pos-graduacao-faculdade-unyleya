@@ -6,9 +6,11 @@ import { getApiMyProducts } from "./services";
 import { useEffect, useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import { Products } from "./types";
+import ListLoading from "../../components/list-loading";
 
 export default function UserProducts() {
   const [myProducts, setMyProducts] = useState<Products[]>([]);
+  const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
 
@@ -35,6 +37,7 @@ export default function UserProducts() {
   };
 
   async function getMypProducts() {
+    setLoading(true);
     try {
       const response = await getApiMyProducts(token);
       setMyProducts(response.data);
@@ -44,6 +47,7 @@ export default function UserProducts() {
     } catch (error) {
       toastError();
     }
+    setLoading(false);
   }
 
   useEffect(() => {
@@ -62,7 +66,7 @@ export default function UserProducts() {
             Criar anúncio
           </button>
         </div>
-
+        {loading && <ListLoading />}
         <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-4 ">
           {myProducts.map((product) => (
             <CardProdutoAdmin
@@ -72,6 +76,7 @@ export default function UserProducts() {
               price={product.price.toString()}
               img={product.url1}
               id={product._id}
+              setMyProducts={setMyProducts}
             />
           ))}
         </div>
