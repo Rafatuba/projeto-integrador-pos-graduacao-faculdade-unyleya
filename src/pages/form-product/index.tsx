@@ -181,7 +181,12 @@ export default function FormProduct() {
                   height: 250,
                 }}
               >
-                <div ref={quillRef} />
+                <textarea
+                  name="descricao"
+                  id=""
+                  className="border w-full h-[300px]"
+                ></textarea>
+                {/* <div ref={quillRef} /> */}
               </div>
               {errors.descricao && (
                 <span className="text-red-600 text-sm mt-4 px-2">
