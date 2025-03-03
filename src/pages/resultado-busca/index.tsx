@@ -42,7 +42,7 @@ export default function ResultadoBusca() {
               name={product.name}
               manufacturer={product.manufacturer}
               img={product.url1}
-              price={product.price.toFixed(2).toString()}
+              price={product.price}
             />
           ))}
         </div>

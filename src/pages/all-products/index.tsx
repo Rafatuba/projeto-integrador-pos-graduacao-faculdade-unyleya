@@ -68,7 +68,7 @@ export default function AllProducts() {
               name={product.name}
               img={product.url1}
               manufacturer={product.manufacturer}
-              price={`R$ ${product.price.toFixed(2).toString()}`}
+              price={product.price}
             />
           ))}
         </div>

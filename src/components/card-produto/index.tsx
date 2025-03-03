@@ -14,7 +14,7 @@ export default function CardProduto(props: CardProps) {
       <img src={props.img} alt={props.name} className="max-w-36" />
       <div className="flex flex-col gap-2 self-start">
         <p className="w-full font-bold text-sm">{props.manufacturer}</p>
-        <p className="w-full">{props.price}</p>
+        <p className="w-full">R$ {props.price}</p>
       </div>
     </button>
   );
