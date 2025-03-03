@@ -2,9 +2,9 @@ import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import AdminTemplate from "../../templates/adminTemplate";
-// import { useQuill } from "react-quilljs";
+import { useQuill } from "react-quilljs";
 import "quill/dist/quill.snow.css";
-// import { useEffect } from "react";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { CadastroProps } from "./types";
 import { saveApiProducts } from "./services";
@@ -22,14 +22,14 @@ const schemaCadastro = yup.object().shape({
 
 export default function FormProduct() {
   const navigate = useNavigate();
-  // const { quill, quillRef } = useQuill();
+  const { quill, quillRef } = useQuill();
   const { token } = useAuthSessionStore();
 
   const {
     register,
     handleSubmit,
     reset,
-    // setValue,
+    setValue,
     formState: { errors },
   } = useForm<CadastroProps>({ resolver: yupResolver(schemaCadastro) });
 
@@ -43,7 +43,7 @@ export default function FormProduct() {
       alert("Erro ao salvar o produto");
     }
   }
-  /*
+
   useEffect(() => {
     if (quill) {
       const handleTextChange = () => {
@@ -70,7 +70,7 @@ export default function FormProduct() {
       };
     }
   }, [quill, setValue]); // Dependências: quill e setValue
-*/
+
   return (
     <AdminTemplate>
       <div className="flex items-center justify-center p-20 w-full">
@@ -184,13 +184,13 @@ export default function FormProduct() {
                   height: 250,
                 }}
               >
-                <textarea
+                {/* <textarea
                   {...register("descricao")}
                   name="descricao"
                   id=""
                   className="border w-full h-[300px]"
-                ></textarea>
-                {/* <div ref={quillRef} /> */}
+                ></textarea> */}
+                <div ref={quillRef} />
               </div>
               {errors.descricao && (
                 <span className="text-red-600 text-sm mt-4 px-2">
