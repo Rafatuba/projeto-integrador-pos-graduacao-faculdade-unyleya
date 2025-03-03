@@ -4,6 +4,7 @@ import { persist } from "zustand/middleware";
 type AuthSessionType = {
   token: string;
   setToken: (novoToken: string) => void;
+  clearToken: () => void;
 };
 
 export const useAuthSessionStore = create<AuthSessionType>()(
@@ -11,6 +12,7 @@ export const useAuthSessionStore = create<AuthSessionType>()(
     (set) => ({
       token: "",
       setToken: (novoToken) => set({ token: novoToken }),
+      clearToken: () => set({ token: "" }),
     }),
     {
       name: "@auth-session-store",

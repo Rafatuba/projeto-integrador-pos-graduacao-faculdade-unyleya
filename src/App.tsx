@@ -14,6 +14,7 @@ import UserProducts from "./pages/user-products";
 import FormProduct from "./pages/form-product";
 import AllProducts from "./pages/all-products";
 import FormProductEdit from "./pages/form-product-edit";
+import DetalhesAdmin from "./pages/detalhes-admin";
 
 export default function App() {
   const router = createBrowserRouter([
@@ -36,6 +37,10 @@ export default function App() {
     {
       path: "/detalhes/:id",
       element: <Detalhes />,
+    },
+    {
+      path: "/detalhes-admin/:id",
+      element: <DetalhesAdmin />,
     },
     {
       path: "/products/busca/:product",

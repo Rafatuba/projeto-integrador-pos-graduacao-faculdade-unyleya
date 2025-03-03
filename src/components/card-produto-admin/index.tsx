@@ -77,7 +77,7 @@ export default function CardProdutoAdmin(props: CardPropsAdmin) {
       <p className="w-full font-bold text-lg">{props.manufacturer}</p>
       <p className="w-full">R$ {props.price}</p>
       <div className=" flex flex-col gap-2 text-2xl absolute bottom-5 right-5">
-        <NavLink to={`/detalhes/${props.id}`} title="Visualizar anúncio">
+        <NavLink to={`/detalhes-admin/${props.id}`} title="Visualizar anúncio">
           <RiEyeLine />
         </NavLink>
         <button
