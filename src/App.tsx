@@ -13,6 +13,7 @@ import Dashboard from "./pages/dashboard";
 import UserProducts from "./pages/user-products";
 import FormProduct from "./pages/form-product";
 import AllProducts from "./pages/all-products";
+import FormProductEdit from "./pages/form-product-edit";
 
 export default function App() {
   const router = createBrowserRouter([
@@ -63,6 +64,10 @@ export default function App() {
     {
       path: "/form-product",
       element: <FormProduct />,
+    },
+    {
+      path: "/form-product-edit/:id",
+      element: <FormProductEdit />,
     },
     {
       path: "*",

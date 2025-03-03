@@ -78,7 +78,7 @@ export default function CardProdutoAdmin(props: CardPropsAdmin) {
           <RiEyeLine />
         </NavLink>
         <button
-          onClick={() => navigate("/form-product")}
+          onClick={() => navigate(`/form-product-edit/${props.id}`)}
           className="cursor-pointer"
           title="Editar anúncio"
         >
