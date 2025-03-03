@@ -68,7 +68,10 @@ export default function CardProdutoAdmin(props: CardPropsAdmin) {
   }
 
   return (
-    <div className="flex flex-col justify-around items-center gap-4 w-3xs h-96 shadow-lg px-3 py-4 bg-white rounded-lg box-border relative">
+    <div
+      className="flex flex-col justify-around items-center gap-4 w-3xs h-96 shadow-lg px-3 py-4 bg-white rounded-lg box-border relative"
+      data-aos="zoom-in-up"
+    >
       <h1 className="text-center font-bold text-xl">{props.name}</h1>
       <img src={props.img} alt={props.name} className="w-40" />
       <p className="w-full font-bold text-lg">{props.manufacturer}</p>
