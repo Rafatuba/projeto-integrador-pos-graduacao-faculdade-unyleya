@@ -4,7 +4,7 @@ export type CardPropsAdmin = {
   name: string;
   img: string;
   manufacturer: string;
-  price: string;
+  price: number;
   id: string;
   setMyProducts: React.Dispatch<React.SetStateAction<Products[]>>;
 };

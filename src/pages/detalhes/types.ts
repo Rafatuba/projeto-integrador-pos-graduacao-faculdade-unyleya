@@ -7,4 +7,11 @@ export type DetalhesProps = {
   url1: string;
   url2: string;
   description: string;
+  user: {
+    name: string;
+    email: string;
+    phone: string;
+    city: string;
+    state: string;
+  };
 };

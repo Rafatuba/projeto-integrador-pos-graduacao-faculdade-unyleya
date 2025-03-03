@@ -73,7 +73,7 @@ export default function UserProducts() {
               key={product._id}
               name={product.name}
               manufacturer={product.manufacturer}
-              price={product.price.toString()}
+              price={product.price}
               img={product.url1}
               id={product._id}
               setMyProducts={setMyProducts}

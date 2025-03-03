@@ -5,6 +5,7 @@ import { getApiDetailsProducts } from "./services";
 import { useEffect, useState } from "react";
 import { DetalhesProps } from "./types";
 import { toast, ToastContainer } from "react-toastify";
+import { formatPrice } from "../../utils/format-price";
 
 export default function Detalhes() {
   const [product, setProduct] = useState<DetalhesProps>({} as DetalhesProps);
@@ -63,18 +64,22 @@ export default function Detalhes() {
         <div className="flex flex-col gap-6 ">
           <div className="flex flex-col gap-4 w-96 shadow-md p-8 rounded-lg">
             <p className="font-bold">Informações do vendedor</p>
-            <p>John Philip de Sousa</p>
-            <p>Fortaleza PR</p>
+            <p>{product.user?.name || "Usuário desconhecido"}</p>
             <p>
-              <span className="font-bold">Email: </span>jpsousa@bol.com.br
+              {product.user?.city} {product.user?.state}
             </p>
             <p>
-              <span className="font-bold">Telefone: </span>(75) 9852-4521
+              <span className="font-bold">Email: </span>
+              {product.user?.email}
+            </p>
+            <p>
+              <span className="font-bold">Telefone: </span>
+              {product.user?.phone}
             </p>
           </div>
           <div className="shadow-md p-8 rounded-lg">
             <p>Preço</p>
-            <p className="text-4xl text-center">R$ {product.price}</p>
+            <p className="text-4xl text-center">{formatPrice(product.price)}</p>
           </div>
         </div>
       </div>
@@ -84,12 +89,7 @@ export default function Detalhes() {
           className="text-gray-600 text-lg"
           dangerouslySetInnerHTML={{ __html: product.description }}
         ></p>
-        <p className="text-gray-600 text-lg">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam
-          vitae quod consectetur ducimus quaerat porro, eum consequatur
-          necessitatibus blanditiis repudiandae, placeat illo ab labore ea!
-          Perspiciatis natus eos vel nemo!
-        </p>
+
         <ToastContainer />
       </div>
     </UserTemplate>
